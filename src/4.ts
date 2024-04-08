@@ -18,30 +18,25 @@ class Person {
 }
 
 abstract class House {
-    protected door: boolean;
-    protected key: Key;
-    protected tenants: Person[];
-    public abstract comeIn(person: Person): void;
-    public abstract openDoor(key: Key): void;
-}
+    protected door: boolean = false;
+    protected tenants: Person[] = [];
 
-class MyHouse extends House {
-    constructor(protected key: Key) {
-        super();
-        this.door = false;
-        this.tenants = [];
-    }
-
-    public openDoor(key: Key): void {
-        if (this.door) return; // door is already open
-
-        if (key === this.key) this.door = true;
-        else console.log('Sorry, this is invalid key!');
-    }
+    constructor(protected key: Key) {}
 
     public comeIn(person: Person): void {
         if (this.door) this.tenants.push(person);
         else console.log('First you have to open the door!');
+    }
+
+    public abstract openDoor(key: Key): void;
+}
+
+class MyHouse extends House {
+    public openDoor(key: Key): void {
+        if (this.door) return; // door is already open
+
+        if (key.getSignature() === this.key.getSignature()) this.door = true;
+        else console.log('Sorry, this is invalid key!');
     }
 }
 

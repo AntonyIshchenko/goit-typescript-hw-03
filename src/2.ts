@@ -35,11 +35,11 @@ class Manager extends Employee {
     // Реалізуйте конструктор та збільшіть salary на 10000
     constructor(
         public name: string,
-        department: string,
+        private department: string,
         protected salary: number
     ) {
-        super(name, department, salary);
-        this.salary += 10000;
+        super(name, department, salary + 10000);
+        // this.salary += 10000;
     }
 }
 
